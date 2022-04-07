@@ -8,4 +8,7 @@ module.exports = {
   images: {
     domains: ['images.stockx.com', 'cdn.shopify.com'],
   },
+  env: {
+    NEXT_PUBLIC_STRIPE_API_KEY: process.env.NEXT_PUBLIC_STRIPE_API_KEY,
+  }
 }

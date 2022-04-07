@@ -2,7 +2,8 @@ import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 
-import products from '../products.json';
+import products from '../products.json'
+import { initiateCheckout } from '../lib/payments';
 
 export default function Home() {
   console.log("products", products);
@@ -24,15 +25,21 @@ export default function Home() {
           {products.map(product =>{
             const {title, description, image, price, id} = product;
             return (
-              // <div key={title}>
-                <a href="#" className={styles.card} key={id}>
-                  <Image src={image} alt={title} width="100%" height="100%" />
-                  <h2>{title}</h2>
-                  <p>{description}</p>
-                  <p>{price}</p>
-                </a>
-              // </div>
-              )
+              <div className={styles.card} key={id}>
+                <Image src={image} alt={title} width="100%" height="100%" />
+                <h2>{title}</h2>
+                <p>{description}</p>
+                <p>${price}</p>
+                <button className={styles.button} onClick={() => initiateCheckout({
+                  lineItems: [
+                    {
+                      price: id,
+                      quantity: 1
+                    }
+                  ]
+                })}>Buy now</button>
+              </div>
+            )
           })}
         </div>
       </main>
