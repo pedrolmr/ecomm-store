@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 
-import useCart from '../hooks/use-cart';
+import {useCart} from '../hooks/use-cart';
 import products from '../products.json'
 // import { initiateCheckout } from '../lib/payments';
 
