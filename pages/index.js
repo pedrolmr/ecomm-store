@@ -5,6 +5,7 @@ import styles from '../styles/Home.module.css';
 
 import {useCart} from '../hooks/use-cart';
 import products from '../products.json'
+import Link from 'next/link';
 // import { initiateCheckout } from '../lib/payments';
 
 // let defaultProduct = {
@@ -12,7 +13,7 @@ import products from '../products.json'
 // }
 
 export default function Home() {
-  const {subTotal, totalItems, addToCart, checkOut} = useCart();
+  const {subtotal, quantity, addToCart, checkOut} = useCart();
   
   // const [cart, updateCart] = useState(defaultProduct);
 
@@ -26,17 +27,17 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
+        {/* <h1 className={styles.title}>
           Welcome to my store!!
         </h1>
 
         <p>
-          <strong>Items:</strong> {totalItems}
+          <strong>Items:</strong> {quantity}
           <br/>
-          <strong>Total Cost:</strong> ${subTotal}
+          <strong>Total Cost:</strong> ${subtotal}
           <br/>
           <button className={styles.button} onClick={() => checkOut()}>Check Out</button>
-        </p>
+        </p> */}
 
         <div className={styles.grid}>
 
@@ -44,10 +45,14 @@ export default function Home() {
             const {title, description, image, price, id} = product;
             return (
               <div className={styles.card} key={id}>
-                <Image src={image} alt={title} width="100%" height="100%" />
-                <h2>{title}</h2>
-                <p>{description}</p>
-                <p>${price}</p>
+                <Link href={`/products/${id}`}>
+                  <a>
+                    <Image src={image} alt={title} width="100%" height="100%" />
+                    <h2>{title}</h2>
+                    <p>{description}</p>
+                    <p>${price}</p>
+                  </a>
+                </Link>
                 <button className={styles.button} onClick={() => {
                   addToCart({id})
                 }

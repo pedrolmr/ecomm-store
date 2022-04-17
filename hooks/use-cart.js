@@ -10,75 +10,77 @@ let defaultCart = {
 export const CartContext = createContext();
 
 export function useCartState() {
-    const [cart, updateCart] = useState(defaultCart);
+  const [cart, updateCart] = useState(defaultCart);
 
-    useEffect(() => {
-      const stateFromStorage = window.localStorage.getItem("cart")
-      const data = stateFromStorage && JSON.parse(stateFromStorage)
+  useEffect(() => {
+    const stateFromStorage = window.localStorage.getItem("cart")
+    const data = stateFromStorage && JSON.parse(stateFromStorage)
 
-      if(data ){
-        updateCart(data)
+    if(data ){
+      updateCart(data)
+    }
+  },[])
+
+  useEffect(() => {
+    const data = JSON.stringify(cart)
+    window.localStorage.setItem("cart", data)
+  },[cart])
+
+  const cartItems = Object.keys(cart.products).map(key => {
+    const product = products.find(({ id }) => `${id}` === `${key}`);
+    return {
+      ...cart.products[key],
+      pricePerUnit: product.price
+    }
+  });
+
+  const subtotal = cartItems.reduce((accumulator, { pricePerUnit, quantity }) => {
+    return accumulator + ( pricePerUnit * quantity );
+  }, 0);
+
+  const quantity = cartItems.reduce((accumulator, { quantity }) => {
+    return accumulator + quantity;
+  }, 0);
+
+  function addToCart({ id }) {
+    updateCart((prev) => {
+      let cart = {...prev};
+
+      if ( cart.products[id] ) {
+        cart.products[id].quantity = cart.products[id].quantity + 1;
+      } else {
+        cart.products[id] = {
+          id,
+          quantity: 1
+        }
       }
-    },[])
 
-    useEffect(() => {
-      const data = JSON.stringify(cart)
-      window.localStorage.setItem("cart", data)
-    },[cart])
+      return cart;
+    })
+  }
 
-    const cartItems = Object.keys(cart.products).map(key => {
-        const product = products.find(({ id }) => `${id}` === `${key}`);
+  function checkout() {
+    initiateCheckout({
+      lineItems: cartItems.map(({ id, quantity }) => {
         return {
-          ...cart.products[key],
-          pricePerItem: product.price
+          price: id,
+          quantity
         }
       })
-    
-      const subTotal = cartItems.reduce((acc, {pricePerItem, quantity}) => {
-        return acc + (pricePerItem * quantity)
-      }, 0)
-    
-      const totalItems = cartItems.reduce((acc, { quantity}) => {
-        return acc + quantity
-      }, 0)
-      console.log("subtotal:", subTotal)
-    
-      function addToCart({ id } = {}){
-        updateCart(prev => {
-          let cartState = {...prev}
-    
-          if(cartState.products[id]){
-            cartState.products[id].quantity = cartState.products[id].quantity + 1
-          }else{
-            cartState.products[id] = {
-              id, 
-              quantity: 1
-            }
-          }
-          return cartState
-        })
-      }
-      function checkOut(){
-        initiateCheckout({
-          lineItems: cartItems.map(item => {
-            return {
-              price: item.id,
-              quantity: item.quantity
-            }
-          })
-        })
-      }
-    return {
-        cart,
-        updateCart,
-        subTotal,
-        totalItems,
-        addToCart,
-        checkOut
-    }
-}
+    })
+  }
 
-export function useCart(){
-    const cart = useContext(CartContext);
-    return cart;
+  return {
+    cart,
+    subtotal,
+    quantity,
+    addToCart,
+    checkout
+  }
+  
+}
+  
+export function useCart() {
+  const cart = useContext(CartContext);
+  return cart;
 }

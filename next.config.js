@@ -6,7 +6,7 @@ const nextConfig = {
 module.exports = {
   nextConfig,
   images: {
-    domains: ['images.stockx.com', 'cdn.shopify.com'],
+    domains: ['images.stockx.com', 'cdn.shopify.com', 'source.unsplash.com'],
   },
   env: {
     NEXT_PUBLIC_STRIPE_API_KEY: process.env.NEXT_PUBLIC_STRIPE_API_KEY,
