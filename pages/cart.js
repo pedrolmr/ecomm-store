@@ -1,4 +1,4 @@
-// import Head from 'next/head';
+import Head from 'next/head'
 import { FaShoppingCart } from 'react-icons/fa';
 import styles from '../styles/Cart.module.css'
 
@@ -29,15 +29,37 @@ const columns = [
 
 export default function Home() {
 
-  const { cartItems, checkout } = useCart();
+  const { cartItems, checkout, updateItem } = useCart();
 
   const data = cartItems.map(({ id, quantity, pricePerUnit }) => {
     const product = products.find(({ id: pid }) => pid === id);
     const { title } = product || {};
+
+    const Quantity = () => {
+      function handleOnSubmit(e) {
+        e.preventDefault();
+
+        const { currentTarget } = e;
+        const inputs = Array.from(currentTarget.elements);
+        const quantity = inputs.find(input => input.name === 'quantity')?.value;
+
+        updateItem({
+          id,
+          quantity: quantity && parseInt(quantity)
+        });
+      }
+      return (
+        <form className={styles.cartQuantity} onSubmit={handleOnSubmit}>
+          <input name="quantity" type="number" min={0} defaultValue={quantity} />
+          <button className={styles.button}>Update</button>
+        </form>
+      )
+    }
+
     return {
       id,
       title,
-      quantity,
+      quantity: <Quantity />,
       pricePerUnit: pricePerUnit.toFixed(2),
       total: (quantity * pricePerUnit).toFixed(2)
     }
@@ -45,10 +67,10 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      {/* <Head>
+      <Head>
         <title>Shopping Cart - Space Jelly</title>
         <link rel="icon" href="/favicon.ico" />
-      </Head> */}
+      </Head>
 
       <main className={styles.main}>
 
