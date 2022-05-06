@@ -27,17 +27,6 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        {/* <h1 className={styles.title}>
-          Welcome to my store!!
-        </h1>
-
-        <p>
-          <strong>Items:</strong> {quantity}
-          <br/>
-          <strong>Total Cost:</strong> ${subtotal}
-          <br/>
-          <button className={styles.button} onClick={() => checkOut()}>Check Out</button>
-        </p> */}
 
         <div className={styles.grid}>
 
@@ -46,8 +35,9 @@ export default function Home() {
             return (
               <div className={styles.card} key={id}>
                 <Link href={`/products/${id}`}>
+                  
                   <a>
-                    <Image src={image} alt={title} width="100%" height="100%" />
+                    <Image src={image} alt={title} width={350} height={300}/>
                     <h2>{title}</h2>
                     <p>{description}</p>
                     <p>${price}</p>
@@ -56,8 +46,8 @@ export default function Home() {
                 <button className={styles.button} onClick={() => {
                   addToCart({id})
                 }
-              }>Add to cart</button>
-            </div>
+                }>Add to cart</button>
+              </div>
             )
           })}
         </div>

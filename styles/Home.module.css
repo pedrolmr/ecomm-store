@@ -29,7 +29,7 @@
 }
 
 .title a {
-  color: #0070f3;
+  /* color: #0070f3; */
   text-decoration: none;
 }
 
@@ -89,8 +89,25 @@
 .card:focus,
 .card:active {
   color: #0070f3;
-  border-color: #0070f3;
+  border-color: #747474;
 }
+.card a{
+  text-decoration: none;
+  color:black;
+}
+/* .imageContainer{
+  width: 100px;
+}
+.imageContainer > div{
+  position: unset !important;
+}
+
+.image{
+  object-fit: contain;
+  width: 100% !important;
+  position: relative !important;
+  height: unset !important;
+} */
 
 .card h2 {
   margin: 0 0 1rem 0;
@@ -99,7 +116,7 @@
 
 .card p {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 0.9rem;
   line-height: 1.5;
 }
 
@@ -124,4 +141,5 @@
   border-radius: .2em;
   border: 0;
   cursor: pointer;
+  margin-top:1rem;
 }
