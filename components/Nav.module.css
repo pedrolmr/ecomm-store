@@ -3,13 +3,14 @@
   align-items: center;
   justify-content: space-between;
   padding: 1em 1.5em;
-  border-bottom:1px solid rgb(229, 229, 229);
+  border-bottom: 1px solid rgb(229, 229, 229);
 }
-.nav a{
+
+.nav a {
   text-decoration: none;
-  color:black;
+  color: black;
 }
-  
+
 .navTitle {
   font-size: 1.5em;
   font-weight: bold;

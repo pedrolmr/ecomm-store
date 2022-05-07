@@ -6,16 +6,10 @@ import styles from '../styles/Home.module.css';
 import {useCart} from '../hooks/use-cart';
 import products from '../products.json'
 import Link from 'next/link';
-// import { initiateCheckout } from '../lib/payments';
-
-// let defaultProduct = {
-//   products: {}
-// }
 
 export default function Home() {
-  const {subtotal, quantity, addToCart, checkOut} = useCart();
-  
-  // const [cart, updateCart] = useState(defaultProduct);
+  const { addToCart } = useCart();
+
 
   
   return (
@@ -37,7 +31,6 @@ export default function Home() {
                 <Link href={`/products/${id}`}>
                   
                   <a>
-                    {/* <Image src={image} alt={title} width={350} height={300}/> */}
                     <div className={styles.imageContainer}>
                       <Image src={image} alt={title} layout="fill" objectFit="cover"/>
                     </div>

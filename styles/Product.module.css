@@ -16,13 +16,15 @@
   max-width: 1000px;
   flex-wrap: wrap;
 }
-.productImage{
+
+.productImage {
   position: relative;
-  width:400px;
+  width: 400px;
   height: 300px;
 }
-.productContent{
-  width:400px;
+
+.productContent {
+  width: 400px;
   margin-left: 1rem;
 }
 
