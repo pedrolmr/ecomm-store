@@ -37,10 +37,17 @@ export default function Home() {
                 <Link href={`/products/${id}`}>
                   
                   <a>
-                    <Image src={image} alt={title} width={350} height={300}/>
-                    <h2>{title}</h2>
-                    <p>{description}</p>
-                    <p>${price}</p>
+                    {/* <Image src={image} alt={title} width={350} height={300}/> */}
+                    <div className={styles.imageContainer}>
+                      <Image src={image} alt={title} layout="fill" objectFit="cover"/>
+                    </div>
+
+                    <div className={styles.cardContent}>
+
+                      <h2>{title}</h2>
+                      <p>{description}</p>
+                      <p>${price}</p>
+                    </div>
                   </a>
                 </Link>
                 <button className={styles.button} onClick={() => {

@@ -70,19 +70,32 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  max-width: 800px;
+  padding:2rem 0;
 }
 
 .card {
   margin: 1rem;
-  padding: 1.5rem;
+  padding-top: 1.5rem;
   text-align: left;
   color: inherit;
   text-decoration: none;
   border: 1px solid #eaeaea;
   border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 300px;
+  /* transition: color 0.15s ease, border-color 0.15s ease; */
+  max-width: 402px;
+}
+
+.imageContainer{
+  position:relative;
+  width: 400px;
+  height:300px;
+  padding:0;
+  margin:0;
+}
+.cardContent{
+  text-decoration: none;
+  color:black;
+  padding:1.5rem;
 }
 
 .card:hover,
@@ -95,19 +108,6 @@
   text-decoration: none;
   color:black;
 }
-/* .imageContainer{
-  width: 100px;
-}
-.imageContainer > div{
-  position: unset !important;
-}
-
-.image{
-  object-fit: contain;
-  width: 100% !important;
-  position: relative !important;
-  height: unset !important;
-} */
 
 .card h2 {
   margin: 0 0 1rem 0;
@@ -141,5 +141,6 @@
   border-radius: .2em;
   border: 0;
   cursor: pointer;
-  margin-top:1rem;
+  margin:1.5rem;
+
 }

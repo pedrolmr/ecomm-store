@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../../styles/Product.module.css';
 
@@ -13,17 +12,12 @@ export default function Product({ product }) {
   const { addToCart } = useCart()
   return (
     <div className={styles.container}>
-      {/* <Head>
-        <title>{ title } - Space Jelly</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head> */}
-
       <main className={styles.main}>
         <div className={styles.productImage}>
-          <Image width={500} height={500} src={image} alt={title}></Image>
+          <Image src={image} alt={title} layout="fill" objectFit="cover"></Image>
         </div>
 
-        <div>
+        <div className={styles.productContent}>
           <h1>
             { title }
           </h1>
@@ -38,7 +32,7 @@ export default function Product({ product }) {
 
           <p>
             <button className={styles.button} onClick={() => addToCart({ id })}>
-              Buy
+              Add to cart
             </button>
           </p>
         </div>
